@@ -19,7 +19,7 @@ pipeline {
 
         stage('Scan Code with Trufflehog') {
             steps {
-                sh "trufflehog --json /opt/Vulnerable-Java-Application > trufflehog_output.json"
+                sh "trufflehog --json /opt/Vulnerable-Java-Application"
             }
         }
 
@@ -29,11 +29,3 @@ pipeline {
             }
         }
     }
-
-    post {
-        always {
-            // Archive the Trufflehog results as a build artifact
-            archiveArtifacts artifacts: 'trufflehog_output.json', onlyIfSuccessful: true
-        }
-    }
-}
