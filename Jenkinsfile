@@ -19,7 +19,7 @@ pipeline {
 
         stage('Scan Code with Trufflehog') {
             steps {
-                sh "trufflehog --regex /opt/Vulnerable-Java-Application"
+                sh "trufflehog --regex /opt/Vulnerable-Java-Application > trufflehog.log"
             }
         }
 
