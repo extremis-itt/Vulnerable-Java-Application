@@ -19,7 +19,7 @@ pipeline {
 
         stage('Scan Code with Trufflehog') {
             steps {
-                sh "trufflehog --regex /opt/Vulnerable-Java-Application > trufflehog.log"
+                sh "trufflehog --json /opt/Vulnerable-Java-Application | tee trufflehog-output.txt"
             }
         }
 
@@ -28,5 +28,12 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
+
+        post {
+        always {
+            // Archive the Trufflehog results as a build artifact
+            archiveArtifacts 'trufflehog-output.txt'
+        }
+    }
     }
 }
