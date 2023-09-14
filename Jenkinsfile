@@ -28,12 +28,12 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
+    }
 
-        post {
+       post {
         always {
             // Archive the Trufflehog results as a build artifact
             archiveArtifacts 'trufflehog-output.txt'
         }
-    }
     }
 }
