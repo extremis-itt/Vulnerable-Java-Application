@@ -23,6 +23,13 @@ pipeline {
             }
         }
 
+         stage('Scan Code with git-secrets') {
+            steps {
+                sh 'cd /opt/Vulnerable-Java-Application'
+                sh 'git-secrets --scan'
+            }
+        }
+
         stage('Build') {
             steps {
                 sh 'mvn clean package'
