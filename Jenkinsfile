@@ -15,12 +15,19 @@ pipeline {
             }
         }
 
-        stage('Check-secrets-trufflehog'){
+     stage('Scan Code with Trufflehog') {
             steps {
-                script{
-                    sh 'rm trufflehog || true'
-                    sh 'trufflehog --regex /opt/Vulnerable-Java-Application > trufflehog'
-                    sh 'cat trufflehog'
+                script {
+                    // Run Trufflehog with the desired options
+                    def trufflehogCommand = """trufflehog --regex /opt/Vulnerable-Java-Application > trufflehog"""
+                    def trufflehogOutput = sh(script: trufflehogCommand, returnStatus: true)
+
+                    // Check the exit status of Trufflehog
+                    if (trufflehogOutput == 0) {
+                        echo 'Trufflehog scan completed successfully'
+                    } else {
+                        error 'Trufflehog scan failed'
+                    }
                 }
             }
         }
