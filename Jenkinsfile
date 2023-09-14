@@ -14,6 +14,16 @@ pipeline {
                 }
             }
         }
+
+        stage('Check-secrets-trufflehog'){
+            steps {
+                script{
+                    sh 'rm trufflehog || true'
+                    sh 'trufflehog --regex /opt/Vulnerable-Java-Application > trufflehog'
+                    sh 'cat trufflehog'
+                }
+            }
+        }
         stage('Build') {
             steps {
                 sh 'mvn clean package'
