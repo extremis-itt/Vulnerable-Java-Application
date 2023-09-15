@@ -26,7 +26,7 @@ pipeline {
          stage('Scan Code with git-secrets') {
             steps {
                 sh 'cd /opt/Vulnerable-Java-Application'
-                sh 'git-secrets --scan'
+                sh 'git-secrets --scan | tee git-secrets.txt'
             }
         }
 
@@ -41,6 +41,7 @@ pipeline {
         always {
             // Archive the Trufflehog results as a build artifact
             archiveArtifacts 'trufflehog-output.txt'
+            archiveArtifacts 'git-secrets.txt'
         }
     }
 }
