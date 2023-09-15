@@ -41,7 +41,7 @@ pipeline {
         always {
             // Archive the Trufflehog results as a build artifact
             archiveArtifacts 'trufflehog-output.txt'
-            archiveArtifacts 'git-secrets.txt'
+            archiveArtifacts 'git-secret.txt'
         }
     }
 }
