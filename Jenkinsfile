@@ -23,6 +23,15 @@ pipeline {
             }
         }
 
+        stage('scan code with snyk for dependencies'){
+            steps{
+                sh '''
+                   cd /opt/Vulnerable-Java-Application
+                   snyk test | tee snyk_output.txt
+                '''
+            }
+        }
+
         
         stage('Build') {
             steps {
@@ -35,6 +44,7 @@ pipeline {
         always {
             // Archive the Trufflehog results as a build artifact
             archiveArtifacts 'trufflehog-output.txt'
+            archiveArtifacts 'snyk_output.txt'
            
         }
     }
