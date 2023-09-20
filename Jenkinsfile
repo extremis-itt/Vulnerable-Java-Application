@@ -31,6 +31,15 @@ pipeline {
             }
         }
 
+        stage('Static application security testing'){
+            steps{
+                sh '''
+                   cd /opt/Vulnerable-Java-Application
+                   mvn sonar:sonar -Dsonar.projectKey=Devsecops -Dsonar.host.url=https://sonarqube.intimetec.americas -Dsonar.login=7aae4cf0a39bebe881d4c671532923085dc84a60
+                '''
+            }
+        }
+
         
         stage('Build') {
             steps {
