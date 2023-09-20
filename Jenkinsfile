@@ -26,8 +26,7 @@ pipeline {
         stage('scan code with snyk for dependencies'){
             steps{
                 sh '''
-                   cd /opt/Vulnerable-Java-Application
-                   snyk test | tee snyk_output.txt
+                   snyk test /opt/Vulnerable-Java-Application | tee snyk_output.txt
                 '''
             }
         }
