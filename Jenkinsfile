@@ -39,7 +39,7 @@ pipeline {
                 '''
             }
         }
-  stage('Static application security testing'){
+  stage('Dynamic application security testing'){
             steps{
                 sh '''
                     nikto -h http://localhost:2341 | tee nikto.txt
