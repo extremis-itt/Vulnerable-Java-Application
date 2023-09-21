@@ -59,6 +59,7 @@ pipeline {
             // Archive the Trufflehog results as a build artifact
             archiveArtifacts 'trufflehog-output.txt'
             archiveArtifacts 'snyk_output.txt'
+            archiveArtifacts 'nikto.txt'
            
         }
     }
