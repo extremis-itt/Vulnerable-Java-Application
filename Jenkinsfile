@@ -39,7 +39,13 @@ pipeline {
                 '''
             }
         }
-
+  stage('Static application security testing'){
+            steps{
+                sh '''
+                    nikto -h http://localhost:2341 | tee nikto.txt
+                '''
+            }
+        }
         
         stage('Build') {
             steps {
